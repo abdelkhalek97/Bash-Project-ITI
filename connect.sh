@@ -13,7 +13,7 @@ function c_onn()
                     case $option1 in    'Create Table' ) create_table;;
                                         'List Tables' ) listing_tables;;
                                         'Drop Table' ) break;;
-                                        'Insert into table' ) insert_into_table;;
+                                        'Insert into table' ) insert;;
                                         'Select From Table' ) break;;
                                         'Delete From Table'  ) break;;
                                         'Update Table' ) break;;
