@@ -4,6 +4,26 @@ function listing_tables()
     ls -I "*.md" #listing all tables excpet metadata
 }
 
+function dataType()
+{
+    select stint in "String" "Integer"
+        do
+        case $stint in
+            "String")
+            echo -n "$stint:" > "$table_name.md"
+            break
+            ;;
+            "Integer")
+            echo -n "$stint:" > "$table_name.md"
+            break
+            ;;
+            * )
+            echo " please enter option 1 or 2 only"
+            ;;
+        esac
+        done
+}
+
 
 
 function create_table()
@@ -36,18 +56,14 @@ function create_table()
             if (( $i==1 ));
                 then echo "please enter the primary key"
                     read pk
-                    echo "please enter type of key string/int"
-                    read stint
-                    
+                    dataType
                 echo -n "$pk:" > $table_name
-                echo -n "$stint:" > "$table_name.md"
+                
             else   
                 echo "please enter column name"
                 read variable
-                echo "please enter type of column string/int"
-                read stint
+                dataType
                 echo -n "$variable:" >> $table_name
-                echo -n "$stint:" >> "$table_name.md"
                 
             fi
         done
