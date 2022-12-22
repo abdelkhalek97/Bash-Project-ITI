@@ -23,7 +23,15 @@ function dataType()
         esac
         done
 }
-
+function checkUnique(){
+awk -F':' -v value=$1 '{ 
+ if(NR!=1){     
+    if($1==value){ 
+        print(1);
+        }
+}
+} ' "$2"
+}
 
 
 function create_table()
@@ -127,6 +135,16 @@ for i in $(seq 1 $number);
         do
             echo "please enter the $col_name" 
             read x
+             if (( $i==1 ));
+            then   
+                var=$(checkUnique $x $table2)
+                while [ "$var" = 1 ]
+                do
+                    echo "pk is not unique"
+                    read x
+                    var=$(checkUnique $x $table2) 
+                done
+            fi
             if [ "$col_type" = "Integer" ] && [[ $x =~ [0-99]+$ ]]
                 then echo -n  "$x:" >> $table2
                 break
