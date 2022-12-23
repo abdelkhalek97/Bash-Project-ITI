@@ -38,47 +38,52 @@ function create_table()
 {   
     echo "pleas enter table name"
     read table_name
-    while [[ ! $table_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]];
+    while [[ !( $table_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ || "$table_name" = 'ok') ]];
         do
-         echo "pleas enter a valid name choose 5 to Exit"
+         echo "please enter a valid name or enter 'ok' to Exit"
          read table_name
         done
-    while [ -e $table_name ];
+    while [ -e $table_name ] ;
         do
+            if [ ! "$table_name" = 'ok' ] ;
+            then break
+            fi
             echo "This table is already exist,please enter another name"
             read table_name
         done
-    touch $table_name 
-    touch "$table_name.md"
-    
-    echo "please enter the number of columns"
-    read number
-    while [[ ! $number =~ [0-99]+$ ]];
-        do
-        echo "please enter a valid number"
+
+    if [ ! "$table_name" = 'ok' ];
+        then
+        touch $table_name 
+        touch "$table_name.md"
+        echo "please enter the number of columns"
         read number
-        done
-    
-    for i in $( seq 1 $number);
-        do
-            if (( $i==1 ));
-                then echo "please enter the primary key"
-                    read pk
+        while [[ ! $number =~ [0-99]+$ ]];
+            do
+            echo "please enter a valid number"
+            read number
+            done
+
+        for i in $( seq 1 $number);
+            do
+                if (( $i==1 ));
+                    then echo "please enter the primary key"
+                        read pk
+                        dataType
+                    echo -n "$pk:" > $table_name
+
+                else   
+                    echo "please enter column name"
+                    read variable
                     dataType
-                echo -n "$pk:" > $table_name
-                
-            else   
-                echo "please enter column name"
-                read variable
-                dataType
-                echo -n "$variable:" >> $table_name
-                
-            fi
-            if (( $i==$number ));
-                then echo "" >> $table_name
-            fi
-        done
-    
+                    echo -n "$variable:" >> $table_name
+
+                fi
+                if (( $i==$number ));
+                    then echo "" >> $table_name
+                fi
+            done
+    fi    
 }
 
 
