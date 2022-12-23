@@ -17,7 +17,10 @@ function c_onn()
                                         'Select From Table' ) break;;
                                         'Delete From Table'  ) break;;
                                         'Update Table' ) break;;
-                                        'Back' ) break;;
+                                        'Back' ) 
+                                        cd .. 
+                                        break
+                                        ;;
                                     
                     esac
                 done
