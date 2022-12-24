@@ -124,46 +124,46 @@ function create_table()
 
 #insert_into_table
 function insert()
-{
-echo "please enter table name"
-    read table2
-declare -i number=$(head -n1 "$table2.md" | awk -F : '{print NF-1 ;}')
-
+    {
+    echo "please enter table name"
+        read table2
+    declare -i number=$(head -n1 "$table2.md" | awk -F : '{print NF-1 ;}')
+    
+    for i in $(seq 1 $number);
+        do
+            col_name=$(head -n1 $table2 | sed  $'s/:/ /g' | awk -v i=$i -F " " '{ print $i }')
+            col_type=$(head -n1 $table2.md | sed  $'s/:/ /g' | awk -v i=$i -F " " '{ print $i }')
+            while [ -e $table2 ]
+            do
+                echo "please enter the $col_name" 
+                read x
+                 if (( $i==1 ));
+                then   
+                    var=$(checkUnique $x $table2)
+                    while [ "$var" = 1 ]
+                    do
+                        echo "pk is not unique"
+                        read x
+                        var=$(checkUnique $x $table2) 
+                    done
+                fi
+                if [ "$col_type" = "Integer" ] && [[ $x =~ [0-99]+$ ]]
+                    then echo -n  "$x:" >> $table2
+                    break
+                elif [ "$col_type" = "String" ]
+                    then echo -n  "$x:" >> $table2
+                    break
+                else
+                    echo "type is not matched, type = $col_type"
+                    continue 
+                fi
+            done
+            if (( $i==$number ));
+            then   
+                echo "" >> $table2
+            fi
+        done
+    }
 
 
 #cut -d: -f1 amr   select coloums
-for i in $(seq 1 $number);
-    do
-        col_name=$(head -n1 $table2 | sed  $'s/:/ /g' | awk -v i=$i -F " " '{ print $i }')
-        col_type=$(head -n1 $table2.md | sed  $'s/:/ /g' | awk -v i=$i -F " " '{ print $i }')
-        while [ -e $table2 ]
-        do
-            echo "please enter the $col_name" 
-            read x
-             if (( $i==1 ));
-            then   
-                var=$(checkUnique $x $table2)
-                while [ "$var" = 1 ]
-                do
-                    echo "pk is not unique"
-                    read x
-                    var=$(checkUnique $x $table2) 
-                done
-            fi
-            if [ "$col_type" = "Integer" ] && [[ $x =~ [0-99]+$ ]]
-                then echo -n  "$x:" >> $table2
-                break
-            elif [ "$col_type" = "String" ]
-                then echo -n  "$x:" >> $table2
-                break
-            else
-                echo "type is not matched, type = $col_type"
-                continue 
-            fi
-        done
-        if (( $i==$number ));
-        then   
-            echo "" >> $table2
-        fi
-    done
-}
