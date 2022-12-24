@@ -1,1 +1,1 @@
-int:string:string:
+Integer:String:String:

@@ -98,43 +98,6 @@ function create_table()
     fi    
 }
 
-
-# function insert_into_table()
-# {
-    
-#     echo "please enter table name"
-#     read table2
-#     while [ ! -e $table2 ]
-#         do
-#             echo "table doesnt exist , try again or exit"
-#             read table2
-#             if [ $table2 == 'exit' ]
-#                 then break
-#             fi
-#         done
-#     while [ -e $table2 ]
-#     do
-#         echo "please enter the primary key"
-#         read pk1
-#         x=$(head -n1 "./$table2.md" | awk -F : '{print $1;}')
-#         if [ "$x" = "int" ] && [[ $pk1 =~ [0-99]+$ ]]
-#             then echo  "$pk1:" >> $table2
-#             break
-#         elif [ "$x" = "string" ]
-#             then echo  "$pk1:" >> $table2
-#             break
-#         else
-#             echo "type is not matched, type = $x"
-#             continue 
-#         fi
-        
-        
-#     done
-
-
-# }
-
-#insert_into_table
 function insert()
     {
     echo "please enter table name"
@@ -166,7 +129,7 @@ function insert()
                     then echo -n  "$x:" >> $table2
                     break
                 else
-                    echo "type is not matched, type = $col_type"
+                    echo "invalid datatype entered, type = $col_type"
                     continue 
                 fi
             done
