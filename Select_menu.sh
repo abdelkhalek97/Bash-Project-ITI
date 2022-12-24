@@ -12,7 +12,10 @@ function selecting()
                 do
                     echo $option2
                     case $option2 in    'Select all data' ) selectAll $tableName ;;
-                                        'Select specific colomun' ) break;;
+                                        'Select specific colomun' ) 
+                                            echo 'enter colomun name'
+                                            
+                                            ;;
                                         'Select specific row' ) break;;
                                         'Back' ) break;;
                                     

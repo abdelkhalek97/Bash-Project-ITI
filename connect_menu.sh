@@ -1,8 +1,9 @@
-
+#! /bin/bash
 function listing_tables()
 {
     ls -I "*.md" #listing all tables excpet metadata
 }
+check=4
 
 function dataType()
 {
@@ -11,10 +12,12 @@ function dataType()
         case $stint in
             "String")
             echo -n "$stint:" >> "$table_name.md"
+            check=0
             break
             ;;
             "Integer")
             echo -n "$stint:" >> "$table_name.md"
+            check=1
             break
             ;;
             * )
@@ -36,19 +39,17 @@ awk -F':' -v value=$1 '{
 
 function create_table()
 {   
-    echo "pleas enter table name"
+    echo "please enter table name"
     read table_name
     while [[ !( $table_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ || "$table_name" = 'ok') ]];
+
         do
-         echo "please enter a valid name or enter 'ok' to Exit"
+         echo "please enter a valid name or enter 'ok' to exit"
          read table_name
         done
-    while [ -e $table_name ] ;
+    while [ -e "$table_name" ] || [[ !( $table_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ || "$table_name" = 'ok') ]]
         do
-            if [ ! "$table_name" = 'ok' ] ;
-            then break
-            fi
-            echo "This table is already exist,please enter another name"
+            echo "table already exist or invalid name, enter 'ok' to exit"
             read table_name
         done
 
@@ -67,18 +68,29 @@ function create_table()
         for i in $( seq 1 $number);
             do
                 if (( $i==1 ));
-                    then echo "please enter the primary key"
-                        read pk
-                        dataType
+                    then 
+                    echo "please enter the primary key"
+                    read pk
+                    while [[ ! $pk =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]];
+                            do
+                             echo "please enter a valid string column name "
+                             read pk
+                            done
+                    dataType
                     echo -n "$pk:" > $table_name
 
-                else   
-                    echo "please enter column name"
-                    read variable
-                    dataType
+                else
+                        echo "please enter column name"
+                        read variable  
+                        while [[ ! $variable =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]];
+                            do
+                             echo "please enter a valid string "
+                             read variable
+                            done
+                        dataType
                     echo -n "$variable:" >> $table_name
-
                 fi
+
                 if (( $i==$number ));
                     then echo "" >> $table_name
                 fi

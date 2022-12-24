@@ -1,8 +1,4 @@
-#usr/bin/bash
-
-#create Database
-
-
+#! /bin/bash
 
 function Create_database()
 {
@@ -27,10 +23,6 @@ function Create_database()
     done
 
 }
-
-
-#List of databases
-
 
 
 
