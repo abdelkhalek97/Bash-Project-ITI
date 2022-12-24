@@ -1,3 +1,5 @@
+source selectingScript.sh
+
 function selecting()
 {
     echo "please enter name of table to select from"
@@ -9,7 +11,7 @@ function selecting()
             select option2 in 'Select all data' 'Select specific colomun' 'Select specific row' 'Back'
                 do
                     echo $option2
-                    case $option2 in    'Select all data' ) break;;
+                    case $option2 in    'Select all data' ) selectAll $tableName ;;
                                         'Select specific colomun' ) break;;
                                         'Select specific row' ) break;;
                                         'Back' ) break;;
