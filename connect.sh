@@ -16,7 +16,7 @@ function c_onn()
                                         'List Tables' ) listing_tables;;
                                         'Drop Table' ) break;;
                                         'Insert into table' ) insert;;
-                                        'Select From Table' ) break;;
+                                        'Select From Table' ) selecting;;
                                         'Delete From Table'  ) break;;
                                         'Update Table' ) break;;
                                         'Back' ) 

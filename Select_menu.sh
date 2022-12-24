@@ -11,11 +11,8 @@ function selecting()
                     echo $option2
                     case $option2 in    'Select all data' ) break;;
                                         'Select specific colomun' ) break;;
-                                        'Select specific row' 'Back' ) break;;
-                                        'Back' ) 
-                                        cd .. 
-                                        break
-                                        ;;
+                                        'Select specific row' ) break;;
+                                        'Back' ) break;;
                                     
                     esac
                 done
