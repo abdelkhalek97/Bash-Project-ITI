@@ -37,7 +37,9 @@ function selectColomun()
         }' $1
     fi
 }
+######################################################################
 
+####################################################selecting row using any table valid value
 function selectRow()
 {
     echo "enter a value to print its row"
@@ -49,3 +51,4 @@ function selectRow()
         }
         } ' $1
 }
+##########################################################################
