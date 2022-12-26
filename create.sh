@@ -16,7 +16,7 @@ function Create_database()
         fi
         done
 
-    while [ -e $name ]  [[ !( $name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$  "$name" = 'exit') ]]
+    while [ -e $name ] || [[ !( $name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ || "$name" = 'exit') ]]
     do
         echo "This name is already taken or invalid name please choose another name or enter 'exit'"
         read name
