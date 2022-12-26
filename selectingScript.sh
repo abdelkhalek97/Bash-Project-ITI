@@ -44,7 +44,8 @@ function selectRow()
 {
     echo "enter a value to print its row"
     read value
-    awk -F : -v value=$value -v counter=$count '{
+    count=0
+    awk -F : -v value=$value '{
         for (i=1; i<NF; i++)
         {
             if($i == value){
