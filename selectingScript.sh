@@ -37,3 +37,15 @@ function selectColomun()
         }' $1
     fi
 }
+
+function selectRow()
+{
+    echo "enter a value to print its row"
+    read value
+    awk -F : -v value=$value '{
+        for (i=1; i<NR; i++)
+        {
+            if($i == value){print($0)}
+        }
+        } ' $1
+}
