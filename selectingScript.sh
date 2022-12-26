@@ -12,7 +12,7 @@ function selectAll()
 function col_num(){
 result=`awk -F : -v value=$2 '{
      for (i=1; i<NF; i++){
-        if($i == value){
+        if($i == value && NR == 1){
             print(i)
         
         }
@@ -44,11 +44,16 @@ function selectRow()
 {
     echo "enter a value to print its row"
     read value
-    awk -F : -v value=$value '{
-        for (i=1; i<NR; i++)
+    awk -F : -v value=$value -v counter=$count '{
+        for (i=1; i<NF; i++)
         {
-            if($i == value){print($0)}
+            if($i == value){
+                print($0)
+                count++
+                }
         }
+        }END{
+            if (count == 0){print ("Invalid value")}
         } ' $1
 }
 ##########################################################################
