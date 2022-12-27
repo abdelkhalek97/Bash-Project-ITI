@@ -21,26 +21,25 @@ function col_num() {
 }
 
 function selectColomun() {
-    echo 'please enter coloumn name'
-    read colName
+    colName=$(whiptail --inputbox "please enter coloumn name" 8 39 --title "Selecting Colomun" 3>&1 1>&2 2>&3)
     result=$(col_num $1 $colName)
     if [[ -z "$result" ]]; then
-        echo "invaild coloumn name"
+        whiptail --msgbox "invaild coloumn name" 20 78
     else
-        awk -F : -v value=$result '{
+        result_col=$(awk -F : -v value=$result '{
         if ( NR != 1)
         print($value)
-        }' $1
+        }' $1)
+        whiptail --msgbox "$result_col" 20 78
     fi
 }
 ######################################################################
 
 ####################################################selecting row using any table valid value
 function selectRow() {
-    echo "enter a value to print its row"
-    read value
+    value=$(whiptail --inputbox "enter a value to print its row" 8 39 --title "Selecting Row" 3>&1 1>&2 2>&3)
     count=0
-    awk -F : -v value=$value '{
+    result_row=$(awk -F : -v value=$value '{
         for (i=1; i<NF; i++)
         {
             if($i == value && NR != 1){
@@ -50,6 +49,7 @@ function selectRow() {
         }
         }END{
             if (count == 0){print ("Invalid value")}
-        } ' $1
+        } ' $1)
+    whiptail --msgbox "$result_row" 20 78
 }
 ##########################################################################
