@@ -14,7 +14,7 @@ function c_onn() {
         while [ 1 ]; do
 
             CHOICE=$(
-                whiptail --title "Operative Systems" --menu "Make your choice" 16 100 9 \
+                whiptail --title "Database connected" --menu "Make your choice" 16 100 9 \
                     "1)" "Create Table" \
                     "2)" "List Tables" \
                     "3)" "Drop Table" \
@@ -35,11 +35,11 @@ function c_onn() {
                 ;;
 
             "3)")
-                insert
+                dropTable
                 ;;
 
             "4)")
-                dropTable
+                insert
                 ;;
 
             "5)")
@@ -62,7 +62,7 @@ function c_onn() {
             esac
         done
     else
-        echo "no such Database please enter a valid Database name"
+        whiptail --msgbox "no such Database please enter a valid Database name" 20 78
     fi
 
 }
