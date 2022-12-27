@@ -1,5 +1,6 @@
 source connect_menu.sh
 source Select_menu.sh
+source up-del.sh
 
 function c_onn()
 {
@@ -17,7 +18,7 @@ function c_onn()
                                         'Drop Table' ) break;;
                                         'Insert into table' ) insert;;
                                         'Select From Table' ) selecting;;
-                                        'Delete From Table'  ) break;;
+                                        'Delete From Table'  ) delete;;
                                         'Update Table' ) break;;
                                         'Back' ) 
                                         cd .. 
