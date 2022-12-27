@@ -21,7 +21,7 @@ function Create_database()
         echo "This name is already taken or invalid name please choose another name or enter 'exit'"
         read name
     done
-    if [[ $name != 'exit' ]];
+    if [ $name != 'exit' ];
     then
     mkdir ./$name
     fi
