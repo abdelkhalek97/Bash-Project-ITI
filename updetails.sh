@@ -23,9 +23,9 @@ function check_datatype() {
                 var=$(validation $update_value $1)
             done
         fi
-        if [ "$3" = "int" ] && [[ $update_value =~ [0-99]+$ ]]; then
+        if [ "$3" = "Integer" ] && [[ $update_value =~ [0-99]+$ ]]; then
             break
-        elif [ "$3" = "str" ]; then
+        elif [ "$3" = "String" ]; then
             break
         else
             echo "type is not matched, type = $3"
