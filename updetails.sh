@@ -40,14 +40,12 @@ function validation() {
 
 function check_datatype() {
     while [ -e $1 ]; do
-        read -p "Enter the updated value : " u_value
-
+        u_value=$(whiptail --inputbox "Enter the updated value" 8 39 --title "Checking dataType" 3>&1 1>&2 2>&3)
         if (($2 == 1)); then
             var=$(validation $u_value $1)
-            echo "$var"
+            whiptail --msgbox "$var" 20 78
             while [ "$var" == 1 ]; do
-                echo "pk is not unique"
-                read u_value
+                u_value=$(whiptail --inputbox "Primary key is not unique" 8 39 --title "Checking dataType" 3>&1 1>&2 2>&3)
                 var=$(validation $u_value $1)
             done
         fi
