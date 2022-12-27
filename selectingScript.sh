@@ -48,7 +48,7 @@ function selectRow()
     awk -F : -v value=$value '{
         for (i=1; i<NF; i++)
         {
-            if($i == value){
+            if($i == value && NR != 1){
                 print($0)
                 count++
                 }

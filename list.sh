@@ -1,5 +1,4 @@
-function listing_Databases()
-{
+function listing_Databases() {
     ls -F ./ | grep '/'
 
 }

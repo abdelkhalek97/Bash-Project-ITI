@@ -3,28 +3,20 @@ source create.sh
 source connect.sh
 source list.sh
 source drop.sh
-if [ -e ./Databases ];then
-            cd Databases
-        else
-            mkdir Databases
-            cd Databases
+if [ -e ./Databases ]; then
+    cd Databases
+else
+    mkdir Databases
+    cd Databases
 fi
 
+select option in 'Create Database' 'List Databases' 'Connect To Databases' 'Drop Database' 'Exit'; do
+    echo $option
+    case $option in 'Create Database') Create_database ;;
+    'List Databases') listing_Databases ;;
+    'Connect To Databases') c_onn ;;
+    'Drop Database') droppingDataBase ;;
+    'Exit') break ;;
+    esac
 
-select option in 'Create Database' 'List Databases' 'Connect To Databases' 'Drop Database' 'Exit'
-    do
-        echo $option
-        case $option in 'Create Database' ) Create_database;;
-                        'List Databases'  ) listing_Databases;;
-                        'Connect To Databases' ) c_onn;;
-                        'Drop Database'  ) droppingDataBase;;
-                        'Exit' ) break;;
-        esac
-    
-
-    done
-
-
-
-
-
+done
