@@ -1,6 +1,7 @@
 source connect_menu.sh
 source Select_menu.sh
-source up-del.sh
+source delete1.sh
+source update.sh
 
 function c_onn()
 {
@@ -24,7 +25,7 @@ function c_onn()
                                         'Insert into table' ) insert;;
                                         'Select From Table' ) selecting;;
                                         'Delete From Table'  ) delete;;
-                                        'Update Table' ) break;;
+                                        'Update Table' ) update;;
                                         'Back' ) 
                                         cd .. 
                                         break
