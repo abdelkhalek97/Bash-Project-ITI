@@ -10,13 +10,36 @@ else
     cd Databases
 fi
 
-select option in 'Create Database' 'List Databases' 'Connect To Databases' 'Drop Database' 'Exit'; do
-    echo $option
-    case $option in 'Create Database') Create_database ;;
-    'List Databases') listing_Databases ;;
-    'Connect To Databases') c_onn ;;
-    'Drop Database') droppingDataBase ;;
-    'Exit') break ;;
-    esac
+while [ 1 ]; do
 
+    CHOICE=$(
+        whiptail --title "Operative Systems" --menu "Make your choice" 16 100 9 \
+            "1)" "Create Database" \
+            "2)" "List Databases" \
+            "3)" "Connect To Databases'" \
+            "4)" "Drop Database" \
+            "5)" "End script" 3>&2 2>&1 1>&3
+    )
+
+    case $CHOICE in
+    "1)")
+        Create_database
+        ;;
+    "2)")
+        listing_Databases
+        ;;
+
+    "3)")
+        c_onn
+        ;;
+
+    "4)")
+        droppingDataBase
+        ;;
+
+    "5)")
+        whiptail --msgbox "Thank you" 20 78
+        exit
+        ;;
+    esac
 done

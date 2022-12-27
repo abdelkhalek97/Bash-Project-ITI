@@ -1,4 +1,4 @@
 function listing_Databases() {
-    ls -F ./ | grep '/'
-
+    list=$(ls -F ./ | grep '/')
+    whiptail --msgbox "$list" 20 78
 }
