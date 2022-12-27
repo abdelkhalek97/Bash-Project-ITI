@@ -59,7 +59,7 @@ function create_table()
         touch "$table_name.md"
         echo "please enter the number of columns"
         read number
-        while [[ ! $number =~ [0-99]+$ ]];
+        while [[ ! $number =~ [1-99]+$ ]];
             do
             echo "please enter a valid number"
             read number
@@ -112,15 +112,26 @@ function insert()
             do
                 echo "please enter the $col_name" 
                 read x
-                 if (( $i==1 ));
+                if (( $i==1 ));
                 then   
-                    var=$(checkUnique $x $table2)
-                    while [ "$var" = 1 ]
-                    do
-                        echo "pk is not unique"
-                        read x
-                        var=$(checkUnique $x $table2) 
-                    done
+                    if [[ -z "$x" ]];
+                    then
+                        echo "Invalid id"
+                        continue
+                    else
+                        var=$(checkUnique $x $table2)
+                        while [ "$var" = 1 ]
+                        do
+                            echo "primary key is not unique or invalid ,please enter again :"
+                            read x
+                            if [[ -z "$x" ]];
+                            then
+                                continue
+                            else
+                                var=$(checkUnique $x $table2) 
+                            fi
+                        done
+                    fi
                 fi
                 if [ "$col_type" = "Integer" ] && [[ $x =~ [0-99]+$ ]]
                     then echo -n  "$x:" >> $table2
@@ -141,4 +152,25 @@ function insert()
     }
 
 
-#cut -d: -f1 amr   select coloums
+
+
+
+
+function dropTable()
+    {
+    echo "please enter the table name"
+    read tableName2
+    while [[ ! -e $tableName2 ]]; do
+        echo "please enter valid table name or enter 'exit'"
+        read tableName2
+        if [[ $tableName2 == 'exit' ]];
+        then
+            break
+        fi
+    done
+
+    if [ $tableName2 != 'exit' ]; 
+    then
+        rm -r ./$tableName2 ./$tableName2.md
+    fi
+    }
