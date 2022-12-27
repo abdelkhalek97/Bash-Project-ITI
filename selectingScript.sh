@@ -2,36 +2,32 @@
 export LC_COLLATE=C
 shopt -s extglob
 
-function selectAll()
-{
-    cat $1
-    echo ''
+function selectAll() {
+    result=$(cat $1)
+    whiptail --msgbox "$result" 20 78
 }
 ####################################################selecting using colomun name
 
-function col_num(){
-result=`awk -F : -v value=$2 '{
+function col_num() {
+    result=$(awk -F : -v value=$2 '{
      for (i=1; i<NF; i++){
         if($i == value && NR == 1){
             print(i)
         
         }
      }
-    }' $1`
+    }' $1)
     echo $result
 }
 
-
-function selectColomun()
-{
+function selectColomun() {
     echo 'please enter coloumn name'
     read colName
-    result=`col_num $1 $colName`
-    if [[ -z "$result" ]];
-    then
-    echo "invaild coloumn name"
+    result=$(col_num $1 $colName)
+    if [[ -z "$result" ]]; then
+        echo "invaild coloumn name"
     else
-    awk -F : -v value=$result '{
+        awk -F : -v value=$result '{
         if ( NR != 1)
         print($value)
         }' $1
@@ -40,8 +36,7 @@ function selectColomun()
 ######################################################################
 
 ####################################################selecting row using any table valid value
-function selectRow()
-{
+function selectRow() {
     echo "enter a value to print its row"
     read value
     count=0
